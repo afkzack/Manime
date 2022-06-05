@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand">Search Manime</a>
+    <form class="d-flex" method="POST" action="{% url 'search-animes' %}">
+        {% csrf_token %}
+      <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="searched">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<br>
+
+<div style="text-align:center;margin-bottom:50px;">
+
+{% if searched %}
+
+<h2>You Search For {{searched}}...</h2>
+
+{% for anime in animes %}
+
+<div class="anime" style="width:126px;height:190px;border-radius:3px;margin-left:5px;margin-bottom:5px;float:left;">
+    <a href="{% url 'episode' anime.id %}"><img src="{{anime.photo.url}}" class="rounded" alt="anime" style="width:126px;height:150px;border-radius:3px;padding:5px;"></a>
+    <a href="{% url 'episode' anime.id %}"><h5 class="text-center" style="color:#ffffff;padding-top:2px;font-size:14px;text-decoration:none;">{{anime.name}}</h5></a>
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<h2>Search For Anime?</h2>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

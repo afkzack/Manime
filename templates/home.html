@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h2 style="padding:5px;margin-top:5px;">Latest Anime Lists</h2>
+<div class="overflow-auto">
+{% for latest in latest_anime %}
+
+<div class="latest_animes" style="width:126px;height:190px;border-radius:3px;margin-left:5px;margin-bottom:2px;margin-top:2px;">
+    <a href="{% url 'episode' latest.id %}"><img src="{{latest.photo.url}}" class="rounded" alt="{{latest.name}} photo" style="width:126px;height:150px;border-radius:3px;padding:5px;"></a>
+    <a href="{% url 'episode' latest.id %}" style="text-decoration:none;"><h6 class="text-center" style="color:#ffffff;padding-top:2px;">{{latest.name}}</h6></a>
+</div>
+
+
+{% endfor %}
+</div>
+
+<div>
+<h2 style="padding:5px;margin-top:5px;">All Anime Lists</h2>
+
+{% for a in anime %}
+
+<div class="anime" style="width:126px;height:190px;border-radius:3px;margin-left:5px;float:left;margin-bottom:55px;margin-top:2px;">
+    <a href="{% url 'episode' a.id %}"><img src="{{a.photo.url}}" class="rounded" alt="{{a.name}} photo" style="width:126px;height:150px;border-radius:3px;padding:5px;"></a>
+    <a href="{% url 'episode' a.id %}" style="text-decoration:none;"><h6 class="text-center" style="color:#ffffff;padding-top:2px;">{{a.name}}</h6></a>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

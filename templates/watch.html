@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div style="position:absolute;left:50%;margin-left:-200px;width:390px;padding:5px;">
+	
+<div style="margin-bottom:55px;">
+{% for w in watch %}
+
+<iframe src="{{w.link}}" width="390" height="250" allowfullscreen></iframe>
+
+{% endfor %}
+
+
+<h5>{{episode.name}} | Ep - {{episode.ep_num}}</h5>
+</div>
+
+</div>
+
+{{anime.status}}
+
+{% endblock %}

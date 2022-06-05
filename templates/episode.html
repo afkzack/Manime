@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div style="position:absolute;left:50%;margin-left:-200px;width:390px;padding:5px;">
+
+	<div class="episodes" style="width:390px;height:220px;border-radius:3px;">
+    <img src="{{anime.cover.url}}" class="rounded" alt="{{anime.name}} Cover" style="width:390px;height:220px;border-radius:3px;padding:5px;">
+</div>
+
+<div class="name" style="margin-bottom:10px;margin-top:10px;text-align:center;">	
+	<h4>{{anime.name}}</h4>
+</div>
+
+<div class="button_group" style="margin-bottom:10px;margin-top:-98px;margin-left:293px;position:absolute;">	
+	<button type="button" class="btn btn-outline-success">
+	{{anime.status}}
+	</button>
+</div>
+
+<div class="button_group" style="margin-bottom:10px;margin-top:10px;">	
+	<button type="button" class="btn btn-warning">
+		{% for g in anime.genre.filter %}
+			{{g.name}},
+		{% endfor %}
+	</button>
+
+	Studio - <button type="button" class="btn btn-dark">
+			{{anime.studio}}
+	</button>
+
+</div>
+
+<div class="button_group" style="margin-bottom:10px;margin-top:10px;">
+	Pub Date - <button type="button" class="btn btn-success">
+			{{anime.pub_date}}
+	</button>
+</div>
+
+<div class="button_group" style="margin-bottom:10px;margin-top:10px;">
+	<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    	Read Summary
+    </button>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade dark" id="myModal">
+  <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-content">
+
+      <!-- Modal body -->
+      <div class="modal-body bg-dark">
+        {{anime.summary}}
+      </div>
+
+            <!-- Modal footer -->
+      <div class="modal-footer bg-dark">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+{% if anime.eps.filter %}
+	<div style="margin-bottom:55px;">
+	{% for e in anime.eps.filter %}
+
+		<a href="{% url 'watch' e.id %}" style="text-decoration: none;">
+		 <button type="button" class="btn btn-outline-info" style="padding:7.453px;margin-bottom:8px;">
+		 	Ep-{{e.ep_num}}
+		 </button>
+		 </a>
+
+	{% endfor %}
+</div>
+{% else %}
+
+		<h4>Coming Soon..</h4>
+
+{% endif %}
+
+</div>
+
+{% endblock %}
